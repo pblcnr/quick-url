@@ -132,3 +132,4 @@ Thumbs.db
 
 # Docker
 .dockerignore
+/src/generated/prisma
