@@ -45,6 +45,24 @@ export class Url {
         return this._isActive;
     }
 
+    static fromDatabase(data: {
+        id: string,
+        originalUrl: string,
+        shortCode: string,
+        createdAt: Date,
+        clickCount: number,
+        isActive: boolean
+    }) : Url {
+        const url = Object.create(Url.prototype);
+        url._id = data.id;
+        url._originalUrl = data.originalUrl;
+        url._shortCode = data.shortCode;
+        url._createdAt = data.createdAt;
+        url._clickCount = data.clickCount;
+        url._isActive = data.isActive;
+        return url;
+    }
+
     /**
      * Verifica se a URL pode ser usada para redirecionamento
      * @returns true se a URL estiver ativa
