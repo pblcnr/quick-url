@@ -34,6 +34,7 @@ export class UrlController {
 
             res.redirect(result.originalUrl)
         } catch (error) {
+            console.error("Erro detalhado: ", error);
             res.status(404).json({ error: "Erro ao redirecionar URL"});
         }
     }
