@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon --loader ts-node/esm src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -49,6 +49,7 @@
     "prisma": "^6.16.2",
     "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.2"
   }
 }
