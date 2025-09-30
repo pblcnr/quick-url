@@ -4,13 +4,15 @@ import { ShortenUrlUseCase } from "../../../application/use-cases/ShortenUrlUseC
 import { RedirectUrlUseCase } from "../../../application/use-cases/RedirectUrlUseCase.js";
 import { UrlController } from "../controllers/UrlController.js";
 import { IUrlRepository } from "../../../domain/repositories/IUrlRepository.js";
+import { RabbitMQPublisher } from "../../messaging/RabbitMQPublisher.js";
 
 export function createRouter(
     repository: IUrlRepository,
-    cache: RedisUrlCache
+    cache: RedisUrlCache,
+    publisher: RabbitMQPublisher
 ): Router {
     const shortenUseCase = new ShortenUrlUseCase(repository);
-    const redirectUseCase = new RedirectUrlUseCase(repository, cache);
+    const redirectUseCase = new RedirectUrlUseCase(repository, cache, publisher);
     const urlController = new UrlController(shortenUseCase, redirectUseCase);
 
     const router = Router();
