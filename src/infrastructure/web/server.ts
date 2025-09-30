@@ -1,24 +1,25 @@
 import express from "express";
 import cors from "cors";
-import router from "./routes/index.js";
+import { Router } from "express";
 
-const app = express();
+export function createApp(router: Router) {
+  const app = express();
 
-app.use(express.json());
-app.use(cors());
+  app.use(express.json());
+  app.use(cors());
+  app.use(router);
 
-app.use(router);
+  return app;
+}
 
-export const startServer = () => {
+export function startServer(app: express.Application): void {
   const port = process.env.PORT;
 
   if (!port) {
-    throw new Error("PORTA não configurada no .env");
+    throw new Error("PORT não configurada no .env");
   }
-  
-  app.listen(port, () => {
-    console.log(`Servidor rodando em ${port}`);
-  });
-};
 
-export default app;
+  app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+  });
+}
